@@ -1,0 +1,61 @@
+#auth {
+  width: 100vw;
+  height: 100vh;
+  background-image: linear-gradient(
+    99deg,
+    #ff70a6,
+    #ff9770 40%,
+    #ffd670 73%,
+    #e9ff70
+  );
+  position: absolute;
+  top: 0;
+  left: 0;
+  -ms-flex-pack: center;
+  justify-content: center;
+  color: #fff;
+}
+
+#auth,
+.auth-container {
+  display: flex;
+  align-items: center;
+}
+
+.auth-container {
+  border-radius: 8px;
+  box-shadow: 0 14px 28px 0 rgba(0, 0, 0, 0.25),
+    0 10px 10px 0 rgba(0, 0, 0, 0.26);
+  background-image: linear-gradient(97deg, #ff7a6e, #ffd670);
+  width: 35vw;
+  height: 55vh;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 20px;
+}
+
+.brand {
+  font-size: 80px;
+  font-weight: 700;
+}
+
+.input-container {
+  display: flex;
+  width: 60%;
+  justify-content: space-around;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-evenly;
+  width: 60%;
+}
+
+.auth-button {
+  border-radius: 1px;
+  background-image: radial-gradient(circle at 50% -46%, #737373, #403d39);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  padding: 10px 20px;
+  color: #fff;
+  border: none;
+}

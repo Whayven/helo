@@ -1,0 +1,55 @@
+#nav {
+  width: 100px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding-top: 20px;
+  color: #fff;
+  background-image: linear-gradient(0deg, #ff7abe, #ff9770);
+  box-shadow: 10px 0 20px 0 rgba(0, 0, 0, 0.1), 5px 0 5px rgba(0, 0, 0, 0.2);
+}
+
+#nav div {
+  margin: 0 0 45px;
+}
+
+.profile-container {
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profile-picture {
+  width: 70px;
+  height: 70px;
+  background-color: #fff;
+  background-position: 50%;
+  background-size: cover;
+  border-radius: 50%;
+  box-shadow: 0 0 20px #333;
+}
+
+.nav-links {
+  height: 120px;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.nav-img {
+  width: 40px;
+}
+
+.logout {
+  position: absolute;
+  bottom: 20px;
+  left: 30px;
+}
