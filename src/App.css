@@ -1,3 +1,4 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
 * {
   box-sizing: border-box;
   margin: 0;
@@ -10,7 +11,7 @@ html, body {
 }
 
 .App {
-  padding-left: 100px;
+  padding: 20px 20px 20px 100px;
   font-family: Open Sans,Courier New,Courier,monospace;
   background-color: #f2f2f2;
   min-width: 100%;
