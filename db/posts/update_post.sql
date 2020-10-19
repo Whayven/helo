@@ -1,0 +1,5 @@
+UPDATE post
+SET title = ${title},
+    img = ${img},
+    content = ${content}
+WHERE post_id = ${id};

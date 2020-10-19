@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
+import { Link } from "react-router-dom";
 
 import Loading from "../Loading/Loading";
 
@@ -58,6 +59,11 @@ class Post extends Component {
               onClick={() => this.deletePost(post_id)}
             >
               Delete
+            </button>
+            <button className="post-button">
+              <Link to={`/edit/${post_id}`}>
+                Edit
+              </Link>
             </button>
           </div>
         ) : (

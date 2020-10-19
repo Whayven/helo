@@ -1,4 +1,4 @@
 SELECT p.post_id, p.title, u.profile_pic AS author_pic, u.username AS author 
 FROM post p
 JOIN users u ON p.author_id = u.user_id
-WHERE u.user_id <> ${id};
+WHERE u.user_id <> ${userid};

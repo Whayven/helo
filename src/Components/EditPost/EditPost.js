@@ -2,19 +2,33 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { withRouter } from "react-router-dom";
 
-import "./Form.css";
-import placeholderImg from "./placeholderImg";
+import "./EditPost.css";
 
-class Form extends Component {
+class EditPost extends Component {
   constructor() {
     super();
 
     this.state = {
       title: "",
       img: "",
-      content: ""
+      content: "",
+      id: null
     }
   }
+
+  componentDidMount() {
+    this.getPost(this.props.match.params.postid);
+  }
+
+  getPost = (id) => {
+    axios
+      .get(`/api/post/${id}`)
+      .then((res) => {
+        const { title, img, content, post_id } = res.data;
+        this.setState({ title, img, content, id: post_id });
+      })
+      .catch((err) => console.log(err));
+  };
 
   handleTitle = (title) => {
     this.setState({ title });
@@ -28,10 +42,10 @@ class Form extends Component {
     this.setState({ content });
   }
 
-  createPost = () => {
-    const { title, img, content } = this.state;
+  updatePost = () => {
+    const { title, img, content, id } = this.state;
 
-    axios.post("/api/post", { title, img, content })
+    axios.put(`/api/post/${id}`, { title, img, content })
     .catch((err) => console.log(err));
 
     this.setState({
@@ -39,14 +53,11 @@ class Form extends Component {
       img: "",
       content: ""
     })
-    this.props.history.push("/dashboard");
+    this.props.history.push(`/post/${id}`);
   }
 
   render() {
     const { title, img, content } = this.state;
-    const previewImg = img.length > 0 
-    ? <div className="form-img" alt="preview" style={{backgroundImage:`url(${img})`}} />
-    : <div className="form-img" alt="preview" style={{backgroundImage:`url(${placeholderImg})`}} />
     
     return (
       <div className="form form-container">
@@ -55,7 +66,7 @@ class Form extends Component {
           <p>Title:</p>
           <input value={title} type="text" className="form-input" onChange={(e) => this.handleTitle(e.target.value)} />
         </div>
-        {previewImg}
+        <div className="form-img" alt="preview" style={{backgroundImage:`url(${img})`}} />
         <div className="form-input-box">
           <p>Image URL:</p>
           <input value={img} type="text" className="form-input" onChange={(e) => this.handleImgUrl(e.target.value)} />
@@ -65,11 +76,11 @@ class Form extends Component {
           <textarea value={content} onChange={(e) => this.handleContent(e.target.value)} />
         </div>
         <div className="form-panel">
-          <button className="form-button" onClick={this.createPost}>Post</button>
+          <button className="form-button" onClick={this.updatePost}>Post</button>
         </div>
       </div>
     )
   }
 }
 
-export default withRouter(Form)
+export default withRouter(EditPost)

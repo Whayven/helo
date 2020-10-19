@@ -6,8 +6,9 @@ function isEmpty(str) {
 
 module.exports = {
   getAllPosts: async (req, res) => {
-    const { id } = req.params;
+    // const { id } = req.params;
     const { search, userposts } = req.query;
+    const { userid } = req.session;
     const db = req.app.get("db");
     let allPosts;
 
@@ -20,13 +21,13 @@ module.exports = {
       }
       // If userposts is false and search is empty, this will respond with all posts where the current user is not the author.
       else if (userposts === "false" && isEmpty(search) === true) {
-        await db.posts.get_all_ex_user({ id }).then((posts) => {
+        await db.posts.get_all_ex_user({ userid }).then((posts) => {
           allPosts = posts;
         });
       }
       // If userposts is false AND search is not empty, this will respond with all posts where the current user is not the author and the title contains the search string.
       else if (userposts === "false" && isEmpty(search) === false) {
-        await db.posts.search_ex_user({ search, id }).then((posts) => {
+        await db.posts.search_ex_user({ search, userid }).then((posts) => {
           allPosts = posts;
         });
       }
@@ -55,14 +56,25 @@ module.exports = {
       });
   },
   addPost: async (req, res) => {
+    // const { id } = req.params;
+    const { userid } = req.session;
+    const { title, img, content } = req.body;
+    const db = req.app.get("db");
+
+    await db.posts
+      .add_post({ title, img, content, userid })
+      .then(() => res.status(200).send("Post added successfully!"))
+      .catch((err) => res.status(500).send(err));
+  },
+  updatePost: async (req, res) => {
     const { id } = req.params;
     const { title, img, content } = req.body;
     const db = req.app.get("db");
 
     await db.posts
-      .add_post({ title, img, content, id })
-      .then(() => res.status(200).send("Post added successfully!"))
-      .catch((err) => res.status(500).send(err));
+    .update_post({ title, img, content, id })
+    .then(() => res.status(200).send("Post updated successfully!"))
+    .catch((err) => res.status(500).send(err));
   },
   deletePost: async (req, res) => {
     const { id } = req.params;

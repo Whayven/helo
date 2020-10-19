@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { connect } from "react-redux";
 
 import Loading from "../Loading/Loading";
 
@@ -20,10 +19,9 @@ class Dashboard extends Component {
   }
 
   componentDidMount() {
-    const { user_id } = this.props.user;
     const { search, userposts } = this.state;
     axios
-      .get(`/api/posts/${user_id}`, {
+      .get("/api/posts", {
         params: {
           userposts,
           search,
@@ -41,10 +39,9 @@ class Dashboard extends Component {
   };
 
   reset = () => {
-    const { user_id } = this.props.user;
     const { userposts } = this.state;
     axios
-      .get(`/api/posts/${user_id}`, {
+      .get("/api/posts", {
         params: {
           userposts,
         },
@@ -111,10 +108,4 @@ class Dashboard extends Component {
   }
 }
 
-const mapStateToProps = (reduxState) => {
-  const { user } = reduxState;
-
-  return { user };
-};
-
-export default connect(mapStateToProps)(Dashboard);
+export default Dashboard;
